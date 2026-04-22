@@ -1,4 +1,4 @@
-console.log("Script started");
+console.log("Jarvis Activated");
 
 /* Questions objects should be formatted like this:
 {
@@ -12,25 +12,58 @@ console.log("Script started");
 */
 
 // TODO: Create an array of objects to store the questions, options, and answer
-
+let questions = [
+    {
+        question: "What is the capital of Arizona?",
+        option1: "Pheonix",
+        option2: "Flagstaff",
+        option3: "Tucson",
+        option4: "Nogales",
+        answer: "Pheonix"
+    },
+    {
+        question: "Who was the first United States president?",
+        option1: "Abraham Lincoln",
+        option2: "Theodore Roosevelt",
+        option3: "George Washington",
+        option4: "Gearge Bush",
+        answer: "George Washington"
+    }
+];
+console.log(questions);
 // TODO: Declare an empty array that will hold the user's answers
-
+let userAnswer = [];
 // TODO: Declare a variable to keep track of which question (index) we are on
-
+let questionNum = 0; 
 function showNextQuestion() {
     // TODO: Get the current question
+    let currQues = questions[questionNum];
     
     // TODO: Set the text of the question element
+    let question = document.getElementById("question");
+    question.innerText = currQues.question;
 
     // TODO: Set the text of each option element
+    let option1 = document.getElementById("option1text")
+    option1.innerText = currQues.option1;
+
+    let option2 = document.getElementById("option2text")
+    option2.innerText = currQues.option2;
+
+    let option3 = document.getElementById("option3text")
+    option3.innerText = currQues.option3;
+
+    let option4 = document.getElementById("option4text")
+    option4 .innerText = currQues.option4;
 }
 
 // TODO: Call showNextQuestion to load the first question when the page loads
+showNextQuestion();
 
 function submitAnswer(event) {
     console.log("Submit clicked");
     // TODO: Prevent the form from reloading the page
-
+    event.preventDefault();
     // Get the radio button input elements
     let option1 = document.getElementById("option1");
     let option2 = document.getElementById("option2");
@@ -38,8 +71,27 @@ function submitAnswer(event) {
     let option4 = document.getElementById("option4");
 
     // TODO: Get the current question
+    let currQues = questions[questionNum];
 
     // TODO: Use a conditional (if/else-if) to check which option was clicked and push the option text into the userAnswer array
+    if (option1.checked){
+        // add option to user answer array
+        userAnswer.push(currQues.option1);
+    }
+    else if (option2.checked){
+        userAnswer.push(currQues.option2);
+
+    }
+    else if (option3.checked){
+        userAnswer.push(currQues.option3);
+    }
+    else if (option4.checked){
+        userAnswer.push(currQues.option4);
+    }
+    else {
+        alert ("Answer Is required to continue")
+    }
+    console.log(userAnswer);
 
     // TODO: Add one to the question index
 
