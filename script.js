@@ -36,6 +36,11 @@ let userAnswer = [];
 // TODO: Declare a variable to keep track of which question (index) we are on
 let questionNum = 0; 
 function showNextQuestion() {
+    // Check if this is the end of the quiz
+    if (questionNum >= questions.length){
+        checkAnswers();
+        return;
+    }
     // TODO: Get the current question
     let currQues = questions[questionNum];
     
@@ -77,16 +82,20 @@ function submitAnswer(event) {
     if (option1.checked){
         // add option to user answer array
         userAnswer.push(currQues.option1);
+        option1.checked = false;
     }
     else if (option2.checked){
         userAnswer.push(currQues.option2);
+        option2.checked = false;
 
     }
     else if (option3.checked){
         userAnswer.push(currQues.option3);
+        option3.checked = false;
     }
     else if (option4.checked){
         userAnswer.push(currQues.option4);
+        option4.checked = false;
     }
     else {
         alert ("Answer Is required to continue")
@@ -94,14 +103,24 @@ function submitAnswer(event) {
     console.log(userAnswer);
 
     // TODO: Add one to the question index
-
+    questionNum++;
     // TODO: Load the next question
+    showNextQuestion();
 }
 
 function checkAnswers() {
     // TODO: Iterate through the user answers array and count how many are correct
-
+    let numCorrect = 0;
+    for(let i = 0; i < userAnswer.length; i++) {
+        let userAnswer = userAnswers[i];
+        let question = questions[i];
+        if (userAnswer == question.answer) {
+            numCorrect++;
+        }
+    }
+   
     // TODO: Show an alert to the user with how many they got right out of the total
+    alert("Good job you got " + numCorrect + " out of " + questions.length); 
 
     // TODO: Reset and start over
 }
